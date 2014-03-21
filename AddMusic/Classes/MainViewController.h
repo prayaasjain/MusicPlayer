@@ -73,6 +73,8 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 	UIBarButtonItem				*playBarButton;
 	UIBarButtonItem				*pauseBarButton;
+    UIBarButtonItem             *nextBarButton;
+    UIBarButtonItem             *prevBarButton;
 	MPMusicPlayerController		*musicPlayer;
 	MPMediaItemCollection		*userMediaItemCollection;
 	UIImage						*noArtworkImage;
@@ -86,6 +88,8 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 @property (nonatomic, retain)	UIBarButtonItem			*playBarButton;
 @property (nonatomic, retain)	UIBarButtonItem			*pauseBarButton;
+@property (nonatomic, retain)   UIBarButtonItem         *nextBarButton;
+@property (nonatomic, retain)   UIBarButtonItem         *prevBarButton;
 @property (nonatomic, retain)	MPMediaItemCollection	*userMediaItemCollection; 
 @property (nonatomic, retain)	MPMusicPlayerController	*musicPlayer;
 @property (nonatomic, retain)	UIImage					*noArtworkImage;
@@ -99,6 +103,8 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 @property (readwrite)			BOOL					playing;
 
 - (IBAction)	playOrPauseMusic:		(id) sender;
+- (IBAction)    playNext:               (id) sender;
+- (IBAction)    playPrev:               (id) sender;
 - (IBAction)	AddMusicOrShowMusic:	(id) sender;
 - (IBAction)	playAppSound:			(id) sender;
 

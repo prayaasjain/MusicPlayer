@@ -13,7 +13,6 @@
 		0A6C6CC00FB396DB00F95575 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A6C6CBF0FB396DB00F95575 /* Default.png */; };
 		0A735D530FACBA430057280A /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A735D520FACBA430057280A /* MainViewController.m */; };
 		0A735D630FACBAAC0057280A /* no_artwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A735D610FACBAAC0057280A /* no_artwork.png */; };
-		0AA441400FB2865E006FAACB /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AA4413F0FB2865E006FAACB /* background.png */; };
 		0AA6AE310FB773F6008185AA /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA6AE2B0FB773F6008185AA /* MainView.xib */; };
 		0AA6AE320FB773F6008185AA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA6AE2D0FB773F6008185AA /* MainWindow.xib */; };
 		0AB904010FB4D1A5004C88C3 /* sound.caf in Resources */ = {isa = PBXBuildFile; fileRef = 0AB904000FB4D1A5004C88C3 /* sound.caf */; };
@@ -27,6 +26,7 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		580748730FAA6E1600373EAF /* MusicTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 580748710FAA6E1600373EAF /* MusicTableViewController.m */; };
 		58D3B0100F9FE329006F1B20 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58D3B00F0F9FE329006F1B20 /* MediaPlayer.framework */; };
+		D877283B18DBC45400E8D55D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = D877283A18DBC45400E8D55D /* background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +38,6 @@
 		0A735D520FACBA430057280A /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		0A735D610FACBAAC0057280A /* no_artwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = no_artwork.png; path = Resources/no_artwork.png; sourceTree = "<group>"; };
 		0A735D7A0FACBB490057280A /* AddMusic-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AddMusic-Info.plist"; sourceTree = "<group>"; };
-		0AA4413F0FB2865E006FAACB /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Resources/background.png; sourceTree = "<group>"; };
 		0AA6AE2C0FB773F6008185AA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/MainView.xib; sourceTree = "<group>"; };
 		0AA6AE2E0FB773F6008185AA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = Resources/en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		0AB904000FB4D1A5004C88C3 /* sound.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = sound.caf; path = Resources/sound.caf; sourceTree = "<group>"; };
@@ -56,6 +55,7 @@
 		580748700FAA6E1600373EAF /* MusicTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicTableViewController.h; sourceTree = "<group>"; };
 		580748710FAA6E1600373EAF /* MusicTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicTableViewController.m; sourceTree = "<group>"; };
 		58D3B00F0F9FE329006F1B20 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		D877283A18DBC45400E8D55D /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +121,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D877283A18DBC45400E8D55D /* background.png */,
 				0A6C6CBF0FB396DB00F95575 /* Default.png */,
-				0AA4413F0FB2865E006FAACB /* background.png */,
 				0A735D610FACBAAC0057280A /* no_artwork.png */,
 				0AB904000FB4D1A5004C88C3 /* sound.caf */,
 				0AA6AE2D0FB773F6008185AA /* MainWindow.xib */,
@@ -201,7 +201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A735D630FACBAAC0057280A /* no_artwork.png in Resources */,
-				0AA441400FB2865E006FAACB /* background.png in Resources */,
+				D877283B18DBC45400E8D55D /* background.png in Resources */,
 				0A6C6CC00FB396DB00F95575 /* Default.png in Resources */,
 				0AB904010FB4D1A5004C88C3 /* sound.caf in Resources */,
 				0AB9044B0FB4E0CB004C88C3 /* ReadMe.txt in Resources */,
@@ -277,7 +277,7 @@
 				GCC_PREFIX_HEADER = AddMusic_Prefix.pch;
 				INFOPLIST_FILE = "AddMusic-Info.plist";
 				PRODUCT_NAME = AddMusic;
-				PROVISIONING_PROFILE = "47D10789-8AD5-44F3-B7E3-DFB36DCD86E7";
+				PROVISIONING_PROFILE = "C45E3B00-D87C-44BB-B246-0EF603C7A3DA";
 			};
 			name = Debug;
 		};
@@ -291,7 +291,7 @@
 				GCC_PREFIX_HEADER = AddMusic_Prefix.pch;
 				INFOPLIST_FILE = "AddMusic-Info.plist";
 				PRODUCT_NAME = AddMusic;
-				PROVISIONING_PROFILE = "47D10789-8AD5-44F3-B7E3-DFB36DCD86E7";
+				PROVISIONING_PROFILE = "C45E3B00-D87C-44BB-B246-0EF603C7A3DA";
 			};
 			name = Release;
 		};
