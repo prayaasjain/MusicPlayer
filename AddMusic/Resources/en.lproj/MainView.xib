@@ -59,7 +59,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="" lineBreakMode="tailTruncation" minimumFontSize="10" enabled="NO" adjustsFontSizeToFit="NO" id="41">
-                    <rect key="frame" x="0.0" y="439" width="320" height="21"/>
+                    <rect key="frame" x="-1" y="459" width="320" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.76999998000000003" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="12"/>
