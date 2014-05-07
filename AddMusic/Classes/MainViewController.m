@@ -132,8 +132,6 @@ void audioRouteChangeListenerCallback (
 @synthesize userMediaItemCollection;	// the media item collection created by the user, using the media item picker	
 @synthesize playBarButton;				// the button for invoking Play on the music player
 @synthesize pauseBarButton;				// the button for invoking Pause on the music player
-@synthesize nextBarButton;
-@synthesize prevBarButton;
 @synthesize musicPlayer;				// the music player, which plays media items from the iPod library
 @synthesize navigationBar;				// the application's Navigation bar
 @synthesize noArtworkImage;				// an image to display when a media item has no associated artwork
@@ -170,10 +168,12 @@ void audioRouteChangeListenerCallback (
 
 - (IBAction) playNext:(id)sender {
     
+    [musicPlayer skipToNextItem];
 }
 
 - (IBAction) playPrev:(id)sender {
     
+    [musicPlayer skipToPreviousItem];
 }
 
 // If there is no selected media item collection, display the media item picker. If there's 
@@ -605,16 +605,7 @@ void audioRouteChangeListenerCallback (
 																				 target: self
 																				 action: @selector (playOrPauseMusic:)]];
     
-    [self setNextBarButton:     [[UIBarButtonItem alloc]    initWithBarButtonSystemItem: UIBarButtonSystemItemFastForward
-                                                                                 target:self
-                                                                                 action:@selector  (playNext:)]];
-    
-    [self setPrevBarButton:     [[UIBarButtonItem alloc]    initWithBarButtonSystemItem: UIBarButtonSystemItemRewind
-                                                                                 target:self
-                                                                                 action:@selector   (playPrev::)]];
-    
-    
-    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects: playBarButton, pauseBarButton, nextBarButton, prevBarButton, nil];
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects: playBarButton, pauseBarButton, nil];
     
 
 	[addOrShowMusicButton	setTitle: NSLocalizedString (@"Add Music", @"Title for 'Add Music' button, before user has chosen some music")

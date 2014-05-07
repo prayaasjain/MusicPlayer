@@ -88,8 +88,6 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
 @property (nonatomic, retain)	UIBarButtonItem			*playBarButton;
 @property (nonatomic, retain)	UIBarButtonItem			*pauseBarButton;
-@property (nonatomic, retain)   UIBarButtonItem         *nextBarButton;
-@property (nonatomic, retain)   UIBarButtonItem         *prevBarButton;
 @property (nonatomic, retain)	MPMediaItemCollection	*userMediaItemCollection; 
 @property (nonatomic, retain)	MPMusicPlayerController	*musicPlayer;
 @property (nonatomic, retain)	UIImage					*noArtworkImage;
