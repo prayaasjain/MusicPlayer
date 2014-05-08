@@ -609,6 +609,8 @@ void audioRouteChangeListenerCallback (
         }
     }
 	else {
+        
+        
         [self.plots insertObject:acceleration atIndex:0];
         NSNumber *n = [NSNumber numberWithDouble:(fabs(acceleration.x)+fabs(acceleration.y)+fabs(acceleration.z))];
         [self.totals insertObject:n atIndex:0];
@@ -647,17 +649,22 @@ void audioRouteChangeListenerCallback (
                 NSLog(@"Knock: %.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%i",self.total,a.x,deltax,a.y,deltay,a.z,deltaz,knockIndicator);
                 [self knockDetected:KnockCount];
                 
-                [self performSelector:@selector(playNext:) withObject:nil afterDelay:0.0f];
-                
-                double delayInSeconds = 5.0;
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    NSLog(@"Delay before playing next track");
-                });
-                
 //                plots = [NSMutableArray arrayWithCapacity:0];
 //                totals = [NSMutableArray arrayWithCapacity:0];
 //                [[self view] setNeedsDisplay];
+
+                [plots removeAllObjects];
+                [totals removeAllObjects];
+                
+                [musicPlayer skipToNextItem];
+                
+//                double delayInSeconds = 5.0;
+//                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//                    NSLog(@"Delay after playing next track");
+//                });
+                
+
                 
                 knockIndicator=1;
                 
@@ -703,7 +710,7 @@ void audioRouteChangeListenerCallback (
 	self.plots = [NSMutableArray arrayWithCapacity:100];
 	self.totals = [NSMutableArray arrayWithCapacity:100];
     
-    [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(flushAccelArrays) userInfo:nil repeats:YES];
+//    [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(flushAccelArrays) userInfo:nil repeats:YES];
 
 	[self setupApplicationAudio];
 	
