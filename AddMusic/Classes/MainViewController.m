@@ -50,6 +50,8 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 #import "MainViewController.h"
 #import <Foundation/Foundation.h>
 
+#define _CHECK_THRESHOLD 460
+
 #pragma mark Audio session callbacks_______________________
 
 // Audio session callback function for responding to audio route changes. If playing 
@@ -150,6 +152,8 @@ void audioRouteChangeListenerCallback (
 										//		since application launch.
 @synthesize playing;					// An application that responds to interruptions must keep track of its playing/
 										//		not-playing state.
+
+@synthesize plots, totals, accel;       //Accelerometer data handlers
 
 #pragma mark Music control________________________________
 
@@ -586,10 +590,120 @@ void audioRouteChangeListenerCallback (
     return YES;
 }
 
+#pragma mark Accelerometer setup_______________________________
+
+-(void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
+	
+	[[self view] setNeedsDisplay];
+    
+    
+    BOOL drawOnlyWhenMoving = NO; //change this if you want it only to update the graph when the movement is over a threshold value
+    float minimumAcceleration =0.9f;
+    
+    if (drawOnlyWhenMoving) {
+        if (abs(acceleration.x)+abs(acceleration.y)+abs(acceleration.z) > minimumAcceleration) {
+            [self.plots insertObject:acceleration atIndex:0];
+            NSNumber *n = [NSNumber numberWithDouble:(fabs(acceleration.x)+fabs(acceleration.y)+fabs(acceleration.z))];
+            [self.totals insertObject:n atIndex:0];
+            
+        }
+    }
+	else {
+        [self.plots insertObject:acceleration atIndex:0];
+        NSNumber *n = [NSNumber numberWithDouble:(fabs(acceleration.x)+fabs(acceleration.y)+fabs(acceleration.z))];
+        [self.totals insertObject:n atIndex:0];
+        
+    }
+    
+     [self checkForKnock];
+	
+}
+
+-(void)checkForKnock {
+    
+    for (int i=1; i<[plots count]; i++) {
+      
+      //  if(25+2*i < _CHECK_THRESHOLD) {
+            
+            UIAcceleration *a = [plots objectAtIndex:i];
+            UIAcceleration *a2 = [plots objectAtIndex:i-1];
+            
+            deltax = (a.x - a2.x);
+            deltay = (a.y - a2.y);
+            deltaz = (a.z - a2.z);
+            self.total=0;
+            
+            self.total= deltax + deltay + deltaz;
+            if((self.total<0) && (knockIndicator==1))
+            {
+                knockIndicator=0;
+                self.total = 0;
+            }
+            
+            if (((self.total)>1.5) && (knockIndicator==0)) {
+                
+                KnockCount++;
+                
+                NSLog(@"Knock: %.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%.6f,%i",self.total,a.x,deltax,a.y,deltay,a.z,deltaz,knockIndicator);
+                [self knockDetected:KnockCount];
+                
+                [self performSelector:@selector(playNext:) withObject:nil afterDelay:0.0f];
+                
+                double delayInSeconds = 5.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    NSLog(@"Delay before playing next track");
+                });
+                
+//                plots = [NSMutableArray arrayWithCapacity:0];
+//                totals = [NSMutableArray arrayWithCapacity:0];
+//                [[self view] setNeedsDisplay];
+                
+                knockIndicator=1;
+                
+                self.total=0;
+                deltax=0;
+                deltay=0;
+                deltaz=0;
+                
+      //      }
+        }
+        
+        
+        
+    }
+    
+}
+
+- (void) knockDetected: (int) count {
+    NSLog(@"Knock #%i", count);
+}
+
+- (void) flushAccelArrays {
+    self.plots = [NSMutableArray arrayWithCapacity:0];
+	self.totals = [NSMutableArray arrayWithCapacity:0];
+    self.total = 0;
+	[[self view] setNeedsDisplay];
+    
+}
+
 // Configure the application.
 - (void) viewDidLoad {
 
     [super viewDidLoad];
+    
+    //Accelerometer setup
+    accel = [UIAccelerometer sharedAccelerometer];
+	[accel setUpdateInterval: 0.01];
+	[accel setDelegate:self];
+    
+    knockIndicator = 0;
+    KnockCount = 0;
+	
+	self.plots = [NSMutableArray arrayWithCapacity:100];
+	self.totals = [NSMutableArray arrayWithCapacity:100];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(flushAccelArrays) userInfo:nil repeats:YES];
 
 	[self setupApplicationAudio];
 	
@@ -700,6 +814,10 @@ void audioRouteChangeListenerCallback (
 	[[MPMediaLibrary defaultMediaLibrary] endGeneratingLibraryChangeNotifications];
 	
 */
+    
+    [[UIAccelerometer sharedAccelerometer] setDelegate:nil];
+    
+    
 	[[NSNotificationCenter defaultCenter] removeObserver: self
 													name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification
 												  object: musicPlayer];

@@ -56,7 +56,7 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 #import "MusicTableViewController.h"
 #import "AddMusicAppDelegate.h"
 
-@interface MainViewController : UIViewController <MPMediaPickerControllerDelegate, MusicTableViewControllerDelegate, AVAudioPlayerDelegate> {
+@interface MainViewController : UIViewController <MPMediaPickerControllerDelegate, MusicTableViewControllerDelegate, AVAudioPlayerDelegate, UIAccelerometerDelegate> {
 
 	AddMusicAppDelegate			*applicationDelegate;
 	IBOutlet UIBarButtonItem	*artworkItem;
@@ -79,6 +79,22 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 	MPMediaItemCollection		*userMediaItemCollection;
 	UIImage						*noArtworkImage;
 	NSTimer						*backgroundColorTimer;
+    
+    //Accelerometer
+    IBOutlet UILabel *xLabel;
+	IBOutlet UILabel *yLabel;
+	IBOutlet UILabel *zLabel;
+	
+    NSMutableArray *plots;
+	NSMutableArray *totals;
+    
+    //float total;
+    float deltax;
+    float deltay;
+    float deltaz;
+    
+    int KnockCount;
+    int knockIndicator;
 }
 
 @property (nonatomic, retain)	UIBarButtonItem			*artworkItem;
@@ -99,6 +115,12 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
 @property (nonatomic, retain)	IBOutlet UIButton		*addOrShowMusicButton;
 @property (readwrite)			BOOL					interruptedOnPlayback;
 @property (readwrite)			BOOL					playing;
+
+//Accelerometer
+@property(nonatomic, retain) NSMutableArray *plots;
+@property(nonatomic, retain) NSMutableArray *totals;
+@property(nonatomic, retain) UIAccelerometer *accel;
+@property(nonatomic) float total;
 
 - (IBAction)	playOrPauseMusic:		(id) sender;
 - (IBAction)    playNext:               (id) sender;
